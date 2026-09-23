@@ -1,0 +1,20 @@
+# Cloudflare Pages equivalent of the Cache-Control block in public/.htaccess.
+#
+# Everything Vite emits into /assets/ carries a content hash in its filename, so
+# a given URL can never change meaning and is safe to freeze for a year.
+#
+# /fonts/ is not content-hashed by Vite - those files live in public/ and keep
+# their names - but the filenames carry the upstream font version (syne-v24,
+# space-mono-v17, poppins-v24), so the URL is just as immutable in practice.
+# Regenerating a
+# font means changing the filename. See the Fonts section of CLAUDE.md.
+#
+# Deliberately NOT frozen: /favicon.ico, /favicon-96.png, /apple-touch-icon.png
+# and /og-image.jpg. Those sit at stable URLs with mutable contents and have
+# each already been replaced once.
+
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable

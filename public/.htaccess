@@ -1,0 +1,61 @@
+# www served a byte-identical 200 instead of redirecting, so the site existed on
+# two hosts. The canonical tag pointed Google at the apex so nothing was ranking
+# twice, but crawl budget and inbound link equity were split across both.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+  RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L]
+
+  # Service pages are prerendered to services/<slug>.html and served at the
+  # slash-free /services/<slug>, which is the form the canonical tags and the
+  # sitemap use. Rewrite internally so the clean URL is served as-is rather
+  # than redirected.
+  #
+  # The layout changed from services/<slug>/index.html when the site moved to
+  # Cloudflare Pages: there, a directory index IS the trailing-slash URL, so
+  # /services/<slug> would 308 to /services/<slug>/ and every canonical would
+  # point at a redirect. A flat file gets the desired URL on both hosts.
+  #
+  # The old directory form is still matched below so a stale deploy of either
+  # shape keeps working during the migration. Remove that second rule once
+  # Hostinger is retired.
+  RewriteCond %{DOCUMENT_ROOT}/$1.html -f
+  RewriteRule ^(services/[^/]+)$ /$1.html [L]
+
+  RewriteCond %{DOCUMENT_ROOT}/$1/index.html -f
+  RewriteRule ^(services/[^/]+)$ /$1/index.html [L]
+
+  # Tags content-hashed build output so the Cache-Control block below can pick
+  # it out by path. No substitution, no [L] - this only sets the env var.
+  RewriteRule ^assets/ - [E=HASHED_ASSET:1]
+
+  # Same treatment for the self-hosted fonts. These are not content-hashed by
+  # Vite (they live in public/ and keep their names), but the filenames carry
+  # the upstream font version - syne-v24, space-mono-v17, poppins-v24 - so a URL is just as
+  # immutable in practice. Regenerating a font means changing the filename.
+  RewriteRule ^fonts/ - [E=HASHED_ASSET:1]
+</IfModule>
+
+# Everything Vite emits into /assets/ carries a content hash in its filename, so
+# a given URL can never change meaning and is safe to cache for a year. The host
+# default was seven days, so repeat visitors revalidated the whole bundle weekly
+# for nothing.
+#
+# This is matched on the request path, not with <FilesMatch>. FilesMatch keys off
+# the filename wherever it appears, which would also have frozen /favicon.ico,
+# /favicon-96.png, /apple-touch-icon.png and /og-image.jpg for a year - those
+# live at stable URLs with mutable contents and have each already been replaced
+# once. Only the hashed /assets/ URLs are safe to mark immutable.
+<IfModule mod_headers.c>
+  Header set Cache-Control "public, max-age=31536000, immutable" env=HASHED_ASSET
+</IfModule>
+
+ErrorDocument 400 /error.php
+ErrorDocument 401 /error.php
+ErrorDocument 403 /error.php
+ErrorDocument 404 /error.php
+ErrorDocument 429 /error.php
+ErrorDocument 500 /error.php
+ErrorDocument 502 /error.php
+ErrorDocument 503 /error.php
+ErrorDocument 504 /error.php

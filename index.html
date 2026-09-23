@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="UTF-8" />
+
+    <!-- Fonts are self-hosted and declared inline. They were previously a
+         <link> to fonts.googleapis.com, which was render-blocking on a second
+         origin: the browser had to resolve DNS, do a TLS handshake and fetch a
+         stylesheet before it knew the woff2 URLs, which live on a *third*
+         origin needing its own handshake. Lighthouse measured that one link at
+         865 ms of render-blocking time, and removing it moved the mobile
+         performance score from 65 to 80 on its own.
+         Declaring @font-face here instead costs no request at all. Whatever
+         the typefaces are, they stay self-hosted - do not reintroduce that link.
+
+         Three families, each with one job. Syne is the display face: the brand
+         wordmark, both hero h1s, every section h2 and card h3. Space Mono is the
+         label face: nav, eyebrows, buttons, card numbers, form labels,
+         breadcrumbs and the footer cluster. Poppins is the reading face, applied
+         through --font-body, which body inherits and every paragraph with it.
+
+         Syne is variable so one file covers 400-800. Space Mono and Poppins are
+         static and need a file per weight. Only the Poppins weights the body
+         copy actually renders are shipped, which is 400 and 600 - measured
+         across all seven routes plus the 404, not guessed. The 300, 500 and 700
+         files Google offers were dropped: nothing that lands on --font-body asks
+         for them, so they would be bytes nobody ever downloads. 700 was needed
+         only while the service-page headings were wrongly inheriting the body
+         face; they name --font-heading now, so it went with them. If a paragraph
+         rule ever starts using another weight, add the face here or the browser
+         will synthesise it.
+
+         Only latin and latin-ext are shipped. Google also offers devanagari for
+         Poppins, dropped for the same reason the Syne greek and vietnamese
+         subsets were: offered, and on an English site never matched.
+
+         Filenames carry the upstream font version (syne-v24, space-mono-v17,
+         poppins-v24), which is what lets public/.htaccess and public/_headers
+         mark /fonts/ immutable - a given URL can never change meaning. Bump the
+         version in the filename if any of these are regenerated.
+
+         Syne and Poppins 400 are both preloaded because @font-face alone is not
+         a fetch: a file is not requested until the stylesheet has parsed and
+         layout has found text needing it. Both are above the fold - Syne for the
+         hero headline, Poppins for the paragraph directly under it - and Poppins
+         400 is only 7.7 KB, so the second preload costs little and removes a
+         visible reflow on all the body copy. Space Mono stays unpreloaded, as it
+         always was: small supporting text only. -->
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/syne-v24-latin.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/poppins-v24-latin-400.woff2" crossorigin />
+    <style>
+      @font-face {
+        font-family: 'Syne';
+        font-style: normal;
+        font-weight: 400 800;
+        font-display: swap;
+        src: url('/fonts/syne-v24-latin.woff2') format('woff2');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      @font-face {
+        font-family: 'Syne';
+        font-style: normal;
+        font-weight: 400 800;
+        font-display: swap;
+        src: url('/fonts/syne-v24-latin-ext.woff2') format('woff2');
+        unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+      }
+      @font-face {
+        font-family: 'Space Mono';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url('/fonts/space-mono-v17-latin-400.woff2') format('woff2');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      @font-face {
+        font-family: 'Space Mono';
+        font-style: normal;
+        font-weight: 700;
+        font-display: swap;
+        src: url('/fonts/space-mono-v17-latin-700.woff2') format('woff2');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      @font-face {
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url('/fonts/poppins-v24-latin-400.woff2') format('woff2');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      @font-face {
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url('/fonts/poppins-v24-latin-ext-400.woff2') format('woff2');
+        unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+      }
+      @font-face {
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 600;
+        font-display: swap;
+        src: url('/fonts/poppins-v24-latin-600.woff2') format('woff2');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      @font-face {
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 600;
+        font-display: swap;
+        src: url('/fonts/poppins-v24-latin-ext-600.woff2') format('woff2');
+        unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+      }
+    </style>
+
+
+    <!-- The favicon was previously an SVG of a white dragon on transparency, so it
+         rendered as nothing against Google's white results page and on light
+         browser tab bars. It now sits on a dark rounded square. /favicon.ico is
+         listed explicitly and also exists at the conventional root path, because
+         Google falls back to /favicon.ico and it was returning 404. Google wants
+         a square whose side is a multiple of 48px, hence the 48/96/192 set. -->
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="canonical" href="https://hydradigital.co.uk/" />
+
+    <title>Professional Custom Software Solutions | Hydra Digital</title>
+    <meta
+      name="description"
+      content="Hydra Digital builds custom websites, web apps, mobile apps and bespoke software for businesses in Dundee, Scotland and across the UK."
+    />
+    <!-- Google has ignored this tag since 2009; kept only because some smaller
+         directories still read it. Terms deliberately use commercial-intent
+         phrasing ("software development company") rather than "[role] Dundee",
+         which Google answers with a recruitment Jobs module. -->
+    <meta
+      name="keywords"
+      content="software development company Dundee, custom software Dundee, bespoke software development Dundee, web development Dundee, web application development Dundee, mobile app development Dundee, business automation Dundee, software development Scotland"
+    />
+
+    <meta property="og:title" content="Professional Custom Software Solutions | Hydra Digital" />
+    <meta
+      property="og:description"
+      content="Custom websites, web apps, mobile apps, automation and bespoke software for businesses. Based in Dundee, working across the UK."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://hydradigital.co.uk/" />
+    <meta property="og:image" content="https://hydradigital.co.uk/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Hydra Digital - professional custom software solutions, Dundee, Scotland" />
+    <meta property="og:locale" content="en_GB" />
+    <meta property="og:site_name" content="Hydra Digital" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Professional Custom Software Solutions | Hydra Digital" />
+    <meta name="twitter:description" content="Custom websites, web apps, mobile apps, automation and bespoke software for businesses. Based in Dundee, working across the UK." />
+    <meta name="twitter:image" content="https://hydradigital.co.uk/og-image.jpg" />
+    <meta name="twitter:image:alt" content="Hydra Digital - professional custom software solutions, Dundee, Scotland" />
+
+    <meta name="geo.region" content="GB-DND" />
+    <meta name="geo.placename" content="Dundee" />
+
+    <meta name="theme-color" content="#0d1a16" />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "@id": "https://hydradigital.co.uk/#business",
+      "name": "Hydra Digital Ltd",
+      "alternateName": "Hydra Digital",
+      "url": "https://hydradigital.co.uk/",
+      "logo": "https://hydradigital.co.uk/favicon.svg",
+      "image": "https://hydradigital.co.uk/og-image.jpg",
+      "description": "Custom software development company based in Dundee, Scotland. We build websites, web applications, mobile apps, automation tools and bespoke software for businesses across the UK.",
+      "telephone": "+447459876609",
+      "email": "contact@hydradigital.co.uk",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Dundee",
+        "addressRegion": "Scotland",
+        "addressCountry": "GB"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 56.462,
+        "longitude": -2.9707
+      },
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Dundee"
+        },
+        {
+          "@type": "Country",
+          "name": "United Kingdom"
+        }
+      ],
+      "priceRange": "££",
+      "openingHours": "Mo-Fr 09:00-17:00",
+      "sameAs": [
+        "https://find-and-update.company-information.service.gov.uk/company/SC903676"
+      ],
+      "founder": {
+        "@type": "Person",
+        "name": "James McFadyen"
+      },
+      "knowsAbout": [
+        "Web Development",
+        "Mobile App Development",
+        "Bespoke Software Development",
+        "Web Applications",
+        "Automation Tools",
+        "E-Commerce Development",
+        "API Development"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Software Development Services",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Website Development" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Web Application Development" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Mobile App Development" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Bespoke Software Development" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Automation & Tools" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Software Support & Maintenance" } }
+        ]
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    <script src="https://basilisk.software/badge/basilisk-badge.js" async></script>
+  </body>
+</html>

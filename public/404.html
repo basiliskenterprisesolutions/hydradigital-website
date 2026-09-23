@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, follow" />
+    <title>404 Not Found - Hydra Digital</title>
+    <style>
+      /* Self-hosted, matching index.html. This was an @import of Google Fonts,
+         which is the worst of both worlds: it blocks rendering and cannot even
+         be discovered until this style block has parsed. Only the faces this
+         page actually uses are declared, which is why there are fewer here than
+         in index.html. This block is maintained by hand and has to be kept in
+         step with index.html - nothing checks it.
+
+         Same division of labour as the rest of the site: Syne for the 404 and
+         the "Not Found" line, Space Mono for the eyebrow, buttons and the path
+         readout, Poppins for the one paragraph of body copy. */
+      @font-face {
+        font-family: 'Syne';
+        font-style: normal;
+        font-weight: 400 800;
+        font-display: swap;
+        src: url('/fonts/syne-v24-latin.woff2') format('woff2');
+      }
+      @font-face {
+        font-family: 'Space Mono';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url('/fonts/space-mono-v17-latin-400.woff2') format('woff2');
+      }
+      @font-face {
+        font-family: 'Space Mono';
+        font-style: normal;
+        font-weight: 700;
+        font-display: swap;
+        src: url('/fonts/space-mono-v17-latin-700.woff2') format('woff2');
+      }
+      @font-face {
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url('/fonts/poppins-v24-latin-400.woff2') format('woff2');
+      }
+
+      :root {
+        --bg: #030304;
+        --text: #e8f0ec;
+        --text-soft: rgba(232, 240, 236, 0.62);
+        --text-muted: rgba(232, 240, 236, 0.42);
+        --line: rgba(255, 255, 255, 0.13);
+        --line-strong: rgba(255, 255, 255, 0.24);
+        --accent: #38c793;
+        --accent-strong: #8ef5b8;
+        --accent-hot: #d4f25a;
+        --font-heading: 'Syne', system-ui, sans-serif;
+        --font-mono: 'Space Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+        --font-body: 'Poppins', system-ui, sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: var(--bg);
+        color: var(--text);
+        font-family: var(--font-body);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      body {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        padding: 32px;
+        background:
+          radial-gradient(ellipse at 22% 20%, rgba(56, 199, 147, 0.14), transparent 42%),
+          radial-gradient(ellipse at 82% 78%, rgba(142, 245, 184, 0.1), transparent 46%),
+          linear-gradient(180deg, #050506 0%, #030304 100%);
+      }
+
+      body::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        opacity: 0.3;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E");
+      }
+
+      body::after {
+        content: '';
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        opacity: 0.14;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.35) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.2) 1px, transparent 1px);
+        background-size: 160px 160px;
+        mask-image: radial-gradient(circle at 50% 40%, black, transparent 70%);
+      }
+
+      .glow {
+        position: fixed;
+        z-index: 0;
+        border-radius: 50%;
+        filter: blur(80px);
+        pointer-events: none;
+        animation: drift 14s ease-in-out infinite;
+      }
+
+      .glow-a {
+        top: 8%;
+        left: 6%;
+        width: 340px;
+        height: 340px;
+        background: rgba(56, 199, 147, 0.22);
+      }
+
+      .glow-b {
+        bottom: 4%;
+        right: 8%;
+        width: 300px;
+        height: 300px;
+        background: rgba(142, 245, 184, 0.16);
+        animation-delay: -7s;
+      }
+
+      @keyframes drift {
+        0%,
+        100% {
+          transform: translate(0, 0) scale(1);
+        }
+        50% {
+          transform: translate(30px, -24px) scale(1.08);
+        }
+      }
+
+      .shell {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        max-width: 640px;
+        text-align: center;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--accent);
+        font-family: var(--font-mono);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+      }
+
+      .eyebrow::before,
+      .eyebrow::after {
+        content: '';
+        width: 24px;
+        height: 1px;
+        background: currentColor;
+        opacity: 0.45;
+      }
+
+      h1 {
+        margin: 22px 0 0;
+        font-family: var(--font-heading);
+        font-weight: 700;
+        line-height: 0.96;
+        letter-spacing: 0;
+        font-size: clamp(5rem, 16vw, 9rem);
+        color: var(--text);
+      }
+
+      h2 {
+        margin: 4px 0 18px;
+        font-family: var(--font-heading);
+        font-weight: 700;
+        font-size: clamp(1.5rem, 3.4vw, 2.1rem);
+        color: var(--text);
+      }
+
+      p {
+        margin: 0 auto;
+        max-width: 46ch;
+        color: var(--text-soft);
+        line-height: 1.7;
+        font-size: 1.02rem;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+        margin-top: 38px;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 48px;
+        padding: 15px 30px;
+        border: 1px solid transparent;
+        font-family: var(--font-mono);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        line-height: 1;
+        text-transform: uppercase;
+        text-decoration: none;
+        clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+        transition: box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
+      }
+
+      .button-primary {
+        background: var(--accent);
+        color: #020403;
+        border-color: rgba(56, 199, 147, 0.55);
+        box-shadow: 0 18px 60px rgba(56, 199, 147, 0.22);
+      }
+
+      .button-primary:hover {
+        box-shadow: 0 22px 70px rgba(56, 199, 147, 0.36);
+      }
+
+      .button-secondary {
+        color: var(--text);
+        background: rgba(255, 255, 255, 0.025);
+        border-color: var(--line-strong);
+      }
+
+      .button-secondary:hover {
+        background: rgba(255, 255, 255, 0.06);
+      }
+
+      .path {
+        margin-top: 44px;
+        color: var(--text-muted);
+        font-family: var(--font-mono);
+        font-size: 12px;
+        letter-spacing: 0.04em;
+      }
+
+      .path code {
+        color: var(--accent-hot);
+        font-family: inherit;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .glow {
+          animation: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="glow glow-a" aria-hidden="true"></div>
+    <div class="glow glow-b" aria-hidden="true"></div>
+
+    <main class="shell">
+      <div class="eyebrow">Error 404</div>
+      <h1>404</h1>
+      <h2>Not Found</h2>
+      <p>
+        The page you&#039;re looking for has been moved, renamed, or never existed. Head back to the homepage or get in touch if
+        this keeps happening.
+      </p>
+
+      <div class="actions">
+        <a class="button button-primary" href="/">Back to Homepage</a>
+        <a class="button button-secondary" href="/#contact">Contact Us</a>
+      </div>
+
+      <div class="path">hydradigital.co.uk<code id="reqPath"></code></div>
+    </main>
+
+    <script>
+      document.getElementById('reqPath').textContent = location.pathname;
+    </script>
+  </body>
+</html>
