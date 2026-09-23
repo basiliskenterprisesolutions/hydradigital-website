@@ -283,7 +283,7 @@ function SiteChrome({ children }: { children: ReactNode }) {
             <img src={logoAsset} alt="" className="brand-mark" fetchPriority="high" />
             <span className="brand-copy">
               <strong>Hydra Digital</strong>
-              <small>Professional Custom Software Solutions</small>
+              <small>Professional Digital Solutions</small>
             </span>
           </a>
 
@@ -320,11 +320,6 @@ function SiteChrome({ children }: { children: ReactNode }) {
         </div>
         <div className="container footer-bottom">
           <p>Hydra Digital Ltd · Company No. SC903676 · © 2026 All rights reserved.</p>
-          <basilisk-badge theme="dark" suppressHydrationWarning>
-            <a href="https://basilisk.software/?ref=hydradigital.co.uk">
-              built by <b>basilisk.software</b>
-            </a>
-          </basilisk-badge>
           <p className="footer-location">
             <svg
               className="footer-location-icon"

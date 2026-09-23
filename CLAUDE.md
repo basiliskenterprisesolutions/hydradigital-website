@@ -32,7 +32,7 @@ src/data/services.ts           Service copy + SEO metadata, single source for ro
 src/entry-server.tsx           Build-time SSR entry + per-route title/meta/schema
 scripts/prerender.mjs          Writes dist/index.html, dist/services/<slug>.html, sitemap.xml
 functions/api/contact.ts       Contact form Pages Function (Resend)
-logos/logo.svg                 Hydra symbol (original mark, green). Header, spinning hero logo,
+logos/logo.svg                 Hydra symbol, white (original mark), viewBox cropped to 66 66 516 516 so it fills the hero like the Basilisk dragon; rotation centre is still 324,324. Header, spinning hero logo,
                                and the particle dragon in Contact all use this one file
 ```
 
@@ -71,7 +71,7 @@ None. The Basilisk GA4 tag and PostHog key were deliberately not carried over. `
 
 ## Credit badge
 
-Footer carries the slotted `<basilisk-badge theme="dark">` with a real anchor to `https://basilisk.software/?ref=hydradigital.co.uk`; the script tag is at the end of `<body>` in `index.html`. Type declaration in `src/basilisk-badge.d.ts`.
+Deliberately omitted at the user's request (23 Sep 2026). Do not add the basilisk-badge.
 
 ## Deployment
 

@@ -3325,11 +3325,3 @@ html.has-custom-cursor .cursor-ring {
   display: flex;
   flex-direction: column;
 }
-
-basilisk-badge {
-  display: inline-block;
-  letter-spacing: normal;
-  word-spacing: normal;
-  text-transform: none;
-  font-style: normal;
-}
