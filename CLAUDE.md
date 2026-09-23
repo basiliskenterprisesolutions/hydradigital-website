@@ -33,7 +33,9 @@ src/entry-server.tsx           Build-time SSR entry + per-route title/meta/schem
 scripts/prerender.mjs          Writes dist/index.html, dist/services/<slug>.html, sitemap.xml
 functions/api/contact.ts       Contact form Pages Function (Resend)
 logos/logo.svg                 Hydra symbol, white (original mark), viewBox cropped to 66 66 516 516 so it fills the hero like the Basilisk dragon; rotation centre is still 324,324. Header, spinning hero logo,
-                               and the particle dragon in Contact all use this one file
+                               and the particle dragon in Contact use this file
+logos/logo-tight.svg           Tight-cropped white symbol for the header lockup only. The lockup copies the
+                               wallpaper: see the comment above `.brand` in index.css (winning block)
 ```
 
 **Prerendered.** Nothing in render scope may touch `window`, `document`, `Math.random()` or dates - keep it in `useEffect`. `entry-server.tsx` must render the same tree as `main.tsx`.

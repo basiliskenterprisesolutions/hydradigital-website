@@ -2107,39 +2107,55 @@ html.has-custom-cursor .cursor-ring {
   min-height: 88px;
 }
 
+/* Header lockup, scaled from the wallpaper lockup in
+   ~/Documents/Hydra Digital Logos/Wallpapers (title 70px / tagline 28px there):
+   - tagline is 0.4x the title, tracked so its letters span exactly the title's width
+   - the mark is as tall as title cap-top to tagline baseline (1.5156em of the title),
+     top-aligned to the cap-top, with 0.3x its height of space before the text.
+   Everything is in em of .brand, so changing .brand font-size rescales the whole lockup.
+   Tracking only fits Syne 700 + Space Mono 400; re-measure if either font changes. */
 .brand {
-  gap: 14px;
+  --brand-mark-h: 1.5156em;
+  align-items: flex-start;
+  gap: 0;
+  font-size: 20px;
 }
 
 .brand-copy {
-  display: grid;
-  gap: 2px;
+  display: block;
 }
 
 .brand-mark {
-  width: 32px;
-  height: 32px;
-  filter:
-    brightness(1.25)
-    drop-shadow(0 0 18px rgba(142, 245, 184, 0.3));
+  width: calc(var(--brand-mark-h) * 0.9319);
+  height: var(--brand-mark-h);
+  margin-top: var(--brand-cap-offset, 0.13em);
+  margin-right: calc(var(--brand-mark-h) * 0.3);
+  filter: drop-shadow(0 0 6px rgba(56, 199, 147, 0.44)) drop-shadow(0 0 14px rgba(142, 245, 184, 0.13));
 }
 
 .brand strong {
+  display: block;
+  margin-right: -0.1429em;
   font-family: var(--font-heading);
-  font-size: 18px;
+  font-size: 1em;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1429em;
   text-transform: uppercase;
-  line-height: 1;
+  line-height: 0.95;
+  white-space: nowrap;
 }
 
 .brand small {
+  display: block;
+  margin: 0.7857em -0.2878em 0 0;
   color: var(--text-muted);
   font-family: var(--font-mono);
-  font-size: 8.65px;
-  letter-spacing: 0.12em;
+  font-size: 0.4em;
+  font-weight: 400;
+  letter-spacing: 0.2878em;
   line-height: 1.2;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .site-nav {
@@ -3042,12 +3058,8 @@ html.has-custom-cursor .cursor-ring {
     width: min(1180px, calc(100% - 24px));
   }
 
-  .brand strong {
-    font-size: 15px;
-  }
-
-  .brand small {
-    font-size: 7.23px;
+  .brand {
+    font-size: 16px;
   }
 
   .site-nav {

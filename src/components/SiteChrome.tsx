@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import type { ReactNode } from 'react'
-import logoAsset from '../../logos/logo.svg'
+import logoAsset from '../../logos/logo-tight.svg'
 import { isWebKitConstrainedEnvironment } from '../lib/env'
 
 // Header, footer and the site-wide canvas/cursor chrome, shared by every route.
